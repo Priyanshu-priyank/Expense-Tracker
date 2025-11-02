@@ -23,21 +23,16 @@ tabs.forEach((t) =>
 document.addEventListener("DOMContentLoaded", () => {
   const initial = document.querySelector(".tab.active") || tabs[0];
   showPage(initial.dataset.target);
-  // small delay to ensure fonts/layout measured
+  //delay to ensure layout measured
   setTimeout(() => positionTrack(document.querySelector(".tab.active")), 80);
 });
 
-// recalc on resize
 window.addEventListener("resize", () => {
   const active = document.querySelector(".tab.active");
   if (active) positionTrack(active);
 });
 
-/* --------------------
-   Data + localStorage
-   -------------------- */
 let expenses = JSON.parse(localStorage.getItem("expenses_v1")) || [
-  // sample seed (can remove)
   {
     id: genId(),
     title: "Grocery shopping",
@@ -68,9 +63,7 @@ function save() {
   localStorage.setItem("expenses_v1", JSON.stringify(expenses));
 }
 
-/* --------------------
-   Render Expenses list
-   -------------------- */
+//expense list
 const expenseListEl = document.getElementById("expenseList");
 const searchEl = document.getElementById("search");
 const catFilterEl = document.getElementById("catFilter");
@@ -113,7 +106,6 @@ function renderExpenses(filter = "") {
     )
     .join("");
 
-  // attach
   expenseListEl
     .querySelectorAll(".edit")
     .forEach((btn) => btn.addEventListener("click", onEdit));
